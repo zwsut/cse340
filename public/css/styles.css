@@ -63,6 +63,34 @@ body {
   border-radius: 10px;
 }
 
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0 1rem;
+  margin: 0;
+}
+
+#inv-display li {
+  background: antiquewhite;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 1rem;
+  text-align: center;
+}
+
+#inv-display li:hover {
+  background-color: lightblue;
+}
+
+#inv-display li img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 #top-header {
   display: flex;
   justify-content: space-between;
@@ -102,10 +130,13 @@ body {
 
 #main-nav ul li {
   margin: 5px 0;
-  color: white;
-  text-decoration: none;
   font-size: 1rem;
   padding: 5px 10px;
+}
+
+#main-nav ul li a {
+  color: white;
+  text-decoration: none;
 }
 
 #reviews {
