@@ -77,7 +77,7 @@ Util.buildVehiclePage = async function (data) {
 
     // Details - right on desktop
     vehicleTemplate += '<div class="vehicle-details-container">';
-    vehicleTemplate += `<h1>${data.inv_make} ${data.inv_model}</h1>`;
+    vehicleTemplate += `<h2>${data.inv_make} ${data.inv_model}</h2>`;
     vehicleTemplate += "<p>";
     vehicleTemplate += `<strong>Year:</strong> ${data.inv_year}<br>`;
     vehicleTemplate += `<strong>Color:</strong> ${data.inv_color}<br>`;
