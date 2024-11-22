@@ -206,6 +206,9 @@ h1 {
 
 #main-nav ul li:hover {
   background-color: white;
+}
+
+#main-nav ul li:hover a {
   color: black;
 }
 
