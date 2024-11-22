@@ -10,6 +10,76 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#vehicle-details {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.vehicle-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  gap: 16px;
+}
+
+.vehicle-image-container img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.vehicle-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vehicle-details-container h1 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.vehicle-details-container p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+}
+
+.footer p,
+.footer a {
+  margin: 0;
+}
+
+.error-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.error-link:hover {
+  text-decoration: underline;
+}
+
+.vehicle-details-container .price {
+  color: blue;
+  font-weight: bold;
+  margin-top: 16px;
+  font-size: 20px;
+}
+
 #hero,
 #upgrades,
 #reviews {
@@ -132,6 +202,11 @@ body {
   margin: 5px 0;
   font-size: 1rem;
   padding: 5px 10px;
+}
+
+#main-nav ul li:hover {
+  background-color: white;
+  color: black;
 }
 
 #main-nav ul li a {
@@ -286,4 +361,13 @@ body {
   #reviews ul {
     margin-left: 5%;
   }
+  .vehicle-container {
+    flex-direction: row;
+    gap: 32px;
+}
+
+.vehicle-image-container,
+.vehicle-details-container {
+    flex: 1;
+}
 }
