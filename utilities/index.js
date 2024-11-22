@@ -65,14 +65,14 @@ Util.buildVehiclePage = async function (data) {
   let vehicleTemplate = "";
 
   if (data) {
-    vehicleTemplate += '<main id="vehicle-details">';
+    vehicleTemplate += '<section id="vehicle-details">';
 
     // Vehicle section container
     vehicleTemplate += '<div class="vehicle-container">';
 
     // Image - Left on desktop
     vehicleTemplate += '<div class="vehicle-image-container">';
-    vehicleTemplate += `<img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}" />`;
+    vehicleTemplate += `<img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}">`;
     vehicleTemplate += "</div>";
 
     // Details - right on desktop
@@ -87,7 +87,7 @@ Util.buildVehiclePage = async function (data) {
     vehicleTemplate += `<p class="price">Price: $${new Intl.NumberFormat('en-US').format(data.inv_price)}</p>`;
     vehicleTemplate += "</div>";
     vehicleTemplate += "</div>";
-    vehicleTemplate += "</main>";
+    vehicleTemplate += "</section>";
   } else {
     vehicleTemplate = '<p class="notice">Sorry, the vehicle you are looking for could not be found.</p>';
   }
