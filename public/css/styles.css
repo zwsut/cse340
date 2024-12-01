@@ -4,7 +4,9 @@
   box-sizing: border-box;
 }
 #login-form,
-#register-form {
+#register-form,
+#add-class-form,
+#add-id-form  {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -15,7 +17,9 @@
 }
 
 #login-form label,
-#register-form label {
+#register-form label,
+#add-class-form label,
+#add-id-form label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -34,7 +38,9 @@
 }
 
 #login-form input,
-#register-form input {
+#register-form input,
+#add-class-form input,
+#add-id-form input {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -47,14 +53,18 @@
 }
 
 #login-form input:focus,
-#register-form input:focus {
+#register-form input:focus
+#add-class-form input:focus,
+#add-id-form input:focus {
   outline: none;
   border-color: #1b007a;
   box-shadow: 0 0 4px #1b007a;
 }
 
 #login-form button,
-#register-form button {
+#register-form button,
+#add-class-form button,
+#add-id-form button {
   width: 100%;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -66,11 +76,20 @@
 }
 
 #login-form button:hover,
-#register-form button:hover {
+#register-form button:hover,
+#add-class-form button:hover,
+#add-id-form button:hover {
   background-color: black;
 }
 .notice {
   color: red;
+}
+
+.management-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
 }
 
 #passwordButton {
@@ -86,11 +105,15 @@
   text-align: center;
 }
 
-#register-form input:required:invalid {
+#register-form input:required:invalid,
+#add-class-form input:required:invalid,
+#add-id-form input:required:invalid {
   box-shadow: 0 0 4px red;
 }
 
-#register-form input:required:valid {
+#register-form input:required:valid,
+#add-class-form input:required:valid,
+#add-id-form input:required:valid {
   box-shadow: 0 0 4px green;
 }
 
