@@ -107,6 +107,7 @@ async function addInventoryResult(req, res, next) {
       nav,
       classifications: classifications.rows,
       errors: errors.array(), // Pass errors to the view
+      locals: req.body,       // Pass submitted data back to the template
     });
   }
 
@@ -149,6 +150,7 @@ async function addInventoryResult(req, res, next) {
     next(err);
   }
 }
+
 
 
 
