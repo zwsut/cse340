@@ -3,7 +3,7 @@
 *:after {
   box-sizing: border-box;
 }
-#login-form,
+#loginForm,
 #register-form,
 #add-class-form,
 #add-id-form  {
@@ -16,7 +16,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#login-form label,
+#loginForm label,
 #register-form label,
 #add-class-form label,
 #add-id-form label {
@@ -37,7 +37,7 @@
   text-decoration: underline;
 }
 
-#login-form input,
+#loginForm input,
 #register-form input,
 #add-class-form input,
 #add-id-form input {
@@ -52,7 +52,7 @@
   box-sizing: border-box;
 }
 
-#login-form input:focus,
+#loginForm input:focus,
 #register-form input:focus
 #add-class-form input:focus,
 #add-id-form input:focus {
@@ -61,7 +61,7 @@
   box-shadow: 0 0 4px #1b007a;
 }
 
-#login-form button,
+#loginForm button,
 #register-form button,
 #add-class-form button,
 #add-id-form button {
@@ -75,7 +75,7 @@
   transition: background-color 0.3s ease;
 }
 
-#login-form button:hover,
+#loginForm button:hover,
 #register-form button:hover,
 #add-class-form button:hover,
 #add-id-form button:hover {

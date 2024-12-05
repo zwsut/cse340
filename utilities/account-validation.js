@@ -122,8 +122,6 @@ validate.loginRules = () => {
         errors,
         title: "Login",
         nav,
-        account_firstname,
-        account_lastname,
         account_email,
       })
       return

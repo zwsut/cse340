@@ -7,9 +7,13 @@ const invModel = require("../models/inventory-model")
 async function buildInvManagement(req, res, next) {
     try {
       let nav = await utilities.getNav()
+
+      const classifications = await invModel.getClassifications();
+            classifications: classifications.rows,
       res.render("inventory/management", {
         title: "Inventory Management",
         nav,
+        classifications: classifications.rows,
         errors: null,
     })
   } catch(err) {
