@@ -6,7 +6,8 @@
 #loginForm,
 #register-form,
 #add-class-form,
-#add-id-form  {
+#add-id-form,
+#edit-form  {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -19,7 +20,8 @@
 #loginForm label,
 #register-form label,
 #add-class-form label,
-#add-id-form label {
+#add-id-form label,
+#edit-form label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -40,7 +42,8 @@
 #loginForm input,
 #register-form input,
 #add-class-form input,
-#add-id-form input {
+#add-id-form input,
+#edit-form input {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -55,7 +58,8 @@
 #loginForm input:focus,
 #register-form input:focus
 #add-class-form input:focus,
-#add-id-form input:focus {
+#add-id-form input:focus,
+#edit-form input:focus {
   outline: none;
   border-color: #1b007a;
   box-shadow: 0 0 4px #1b007a;
@@ -64,7 +68,8 @@
 #loginForm button,
 #register-form button,
 #add-class-form button,
-#add-id-form button {
+#add-id-form button,
+#edit-form button {
   width: 100%;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -78,7 +83,8 @@
 #loginForm button:hover,
 #register-form button:hover,
 #add-class-form button:hover,
-#add-id-form button:hover {
+#add-id-form button:hover,
+#edit-form button:hover {
   background-color: black;
 }
 .notice {

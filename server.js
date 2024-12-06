@@ -61,6 +61,7 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.use(static)
+// app.use(express.static("public"));
 
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))

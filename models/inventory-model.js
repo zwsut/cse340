@@ -25,6 +25,48 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 
+// Update inv
+const updateInventory = async (data) => {
+  const sql = `
+    UPDATE public.inventory
+    SET
+      classification_id = $1,
+      inv_make = $2,
+      inv_model = $3,
+      inv_year = $4,
+      inv_description = $5,
+      inv_image = $6,
+      inv_thumbnail = $7,
+      inv_price = $8,
+      inv_miles = $9,
+      inv_color = $10
+    WHERE inv_id = $11
+  `;
+
+  const values = [
+    data.classification_id,
+    data.inv_make,
+    data.inv_model,
+    data.inv_year,
+    data.inv_description,
+    data.inv_image,
+    data.inv_thumbnail,
+    data.inv_price,
+    data.inv_miles,
+    data.inv_color,
+    data.inv_id,
+  ];
+
+  try {
+    const result = await pool.query(sql, values);
+    return result;
+  } catch (err) {
+    console.error("Error in updateInventory:", err);
+    throw err;
+  }
+};
+
+
 /* ***************************
  *  Get all deatails on a specific vehicle by inventory id
  * ************************** */
@@ -106,4 +148,4 @@ async function addInventory(data) {
 }
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailByVehicleId, addClass, addInventory }
+module.exports = { updateInventory, getClassifications, getInventoryByClassificationId, getDetailByVehicleId, addClass, addInventory }
