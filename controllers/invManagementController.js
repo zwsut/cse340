@@ -110,8 +110,8 @@ async function addInventoryResult(req, res, next) {
       title: "Add New Inventory",
       nav,
       classifications: classifications.rows,
-      errors: errors.array(), // Pass errors to the view
-      locals: req.body,       // Pass submitted data back to the template
+      errors: errors.array(),
+      locals: req.body,
     });
   }
 
@@ -200,7 +200,6 @@ const updateInventoryResult = async (req, res, next) => {
     const classifications = await invModel.getClassifications();
     const nav = await utilities.getNav();
 
-    // Render the edit-inventory view with errors and data
     return res.status(400).render("./inventory/edit-inventory", {
       title: `Edit ${req.body.inv_make} ${req.body.inv_model}`,
       nav,
@@ -235,7 +234,6 @@ const updateInventoryResult = async (req, res, next) => {
       inv_color,
     } = req.body;
 
-    // Call the model method to perform the update
     const result = await invModel.updateInventory({
       inv_id,
       classification_id,
@@ -264,9 +262,55 @@ const updateInventoryResult = async (req, res, next) => {
   }
 };
 
+/* ***************************
+ *  Build Delete Confirmation View
+ * ************************** */
+async function buildDeleteView(req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id, 10);
+    const nav = await utilities.getNav()
+    const itemData = await invModel.getDetailByVehicleId(inv_id)
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+
+    res.render("./inventory/delete-confirm", {
+      title: `Delete ${itemName}`,
+      nav,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_price: itemData.inv_price,
+    });
+  } catch (err) {
+    console.error("Error building delete confirmation view:", err);
+    next(err);
+  }
+}
+
+/* ***************************
+ *  Process Delete Inventory Item
+ * ************************** */
+const processDelete = async (req, res, next) => {
+  try {
+    const { inv_id } = req.body;
+
+    const result = await invModel.deleteInventoryById(inv_id);
+
+    if (result.rowCount > 0) {
+      req.flash("success", "Inventory item deleted successfully!");
+      return res.redirect("/inv");
+    } else {
+      req.flash("error", "Failed to delete inventory item. Item may not exist.");
+      return res.redirect("/inv");
+    }
+  } catch (err) {
+    console.error("Error in processDelete:", err);
+    req.flash("error", "An error occurred during the delete process.");
+    res.redirect("/inv");
+  }
+};
 
 
 
-
-
-module.exports = { updateInventoryResult, editInventoryView, buildInvManagement, buildAddClassification, addClassResult, buildAddInventory, addInventoryResult }
+module.exports = { processDelete, buildDeleteView, updateInventoryResult, editInventoryView, buildInvManagement, buildAddClassification, addClassResult, buildAddInventory, addInventoryResult }

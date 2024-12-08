@@ -3,11 +3,12 @@
 *:after {
   box-sizing: border-box;
 }
+
 #loginForm,
 #register-form,
 #add-class-form,
 #add-id-form,
-#edit-form  {
+#edit-form {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -56,7 +57,7 @@
 }
 
 #loginForm input:focus,
-#register-form input:focus
+#register-form input:focus,
 #add-class-form input:focus,
 #add-id-form input:focus,
 #edit-form input:focus {
@@ -87,6 +88,7 @@
 #edit-form button:hover {
   background-color: black;
 }
+
 .notice {
   color: red;
 }
@@ -242,7 +244,7 @@ h1 {
 }
 
 #hero-overlay h3 {
-  font-size: 0.80rem;
+  font-size: 0.8rem;
 }
 
 #hero-overlay a {
@@ -350,7 +352,6 @@ h1 {
 }
 
 #reviews ul {
-  /* list-style: none; */
   padding-left: 0;
 }
 
@@ -410,6 +411,177 @@ h1 {
   padding: 20px;
 }
 
+#tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+#tools a {
+  display: inline-block;
+  padding: 10px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  background-color: #555;
+  border: 1px solid #444;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+#tools a:hover {
+  background-color: #777;
+  border-color: #666;
+  transform: translateY(-2px);
+}
+
+#tools a:active {
+  transform: translateY(0);
+}
+
+.management-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.management-container h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #444;
+}
+
+.management-container p {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.management-container button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.management-container button:hover {
+  background-color: #0056b3;
+}
+
+.management-container button:active {
+  background-color: #003f7f;
+}
+
+.management-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.management-container select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#inventoryDisplay th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.updateForm {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.updateForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+  font-size: 1rem;
+}
+
+.updateForm input[type="text"],
+.updateForm input[type="email"],
+.updateForm input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.updateForm input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.updateForm button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.updateForm button:hover {
+  background-color: #218838;
+}
+
+.updateForm button:active {
+  background-color: #1e7e34;
+}
+
+.updateForm input[type="hidden"] {
+  display: none;
+}
+
 @media screen and (min-width: 900px) {
   body {
     background-image: url('/images/site/small_check.jpg');
@@ -417,6 +589,31 @@ h1 {
     background-position: center;
   }
 
+  .management-container {
+    max-width: 800px;
+  }
+
+  .updateForm {
+    max-width: 600px;
+  }
+
+  #top-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+  }
+
+  #tools {
+    flex-direction: row;
+    gap: 15px;
+    width: auto;
+  }
+
+  #tools a {
+    padding: 8px 15px;
+    font-size: 1rem;
+  }
 
   #hero-overlay {
     top: 10%;
@@ -430,16 +627,15 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     border-radius: 1rem;
-}
+  }
 
+  #hero-overlay h2 {
+    font-size: 1.5rem;
+  }
 
-#hero-overlay h2 {
-  font-size: 1.5rem;
-}
-
-#hero-overlay h3 {
-  font-size: 1.2rem;
-}
+  #hero-overlay h3 {
+    font-size: 1.2rem;
+  }
 
   #wrapper {
     width: 80%;
@@ -463,7 +659,7 @@ h1 {
     justify-content: space-between;
   }
 
-  #reviews, 
+  #reviews,
   #upgrades {
     width: 48%;
   }
@@ -475,6 +671,7 @@ h1 {
   #tools a {
     font-size: 1.2rem;
   }
+
   #reviews li {
     font-size: 1.5rem;
     margin-bottom: 5px;
@@ -483,13 +680,14 @@ h1 {
   #reviews ul {
     margin-left: 5%;
   }
+
   .vehicle-container {
     flex-direction: row;
     gap: 32px;
-}
+  }
 
-.vehicle-image-container,
-.vehicle-details-container {
+  .vehicle-image-container,
+  .vehicle-details-container {
     flex: 1;
-}
+  }
 }

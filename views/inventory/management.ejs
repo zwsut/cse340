@@ -6,15 +6,18 @@
     } %>
 
 <!-- Message Block -->
-<%- messages() %>
+<% if (messages.error) { %>
+  <div class="flash-error">
+    <%= messages.error %>
+  </div>
+<% } %>
 
-<% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
+<% if (messages.success) { %>
+  <div class="flash-success">
+    <%= messages.success %>
+  </div>
+<% } %>
+
 <section class="management-container">
   <form action="/inv/add-classification" method="get" class="management-button">
       <button type="submit">Add New Classification</button>

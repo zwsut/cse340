@@ -11,7 +11,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
     const classification_id = req.params.classificationId;
     const data = await invModel.getInventoryByClassificationId(classification_id);
 
-    // If no data associated, throw error
     if (!data || data.length === 0) {
       const error = new Error("Vehicle classification not found");
       error.status = 404;
@@ -41,7 +40,6 @@ invCont.buildByInvId = async function (req, res, next) {
     const inv_id = req.params.invId;
     const data = await invModel.getDetailByVehicleId(inv_id);
 
-    // If not data associated, throw error
     if (!data) {
       const error = new Error("Vehicle not found");
       error.status = 404;

@@ -6,15 +6,17 @@
     } %>
 
 <!-- Message Block -->
-<%- messages() %>
+<% if (messages.error) { %>
+  <div class="flash-error">
+    <%= messages.error %>
+  </div>
+<% } %>
 
-<% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
+<% if (messages.success) { %>
+  <div class="flash-success">
+    <%= messages.success %>
+  </div>
+<% } %>
 
 <!-- Login form -->
 <!-- <form id="login-form" action="/login" method="POST"> -->

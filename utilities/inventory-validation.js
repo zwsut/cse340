@@ -38,7 +38,7 @@ const newInventoryRules = () => [
 const checkInventoryData = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const classifications = await getClassifications(); // Fetch classification list
+    const classifications = await getClassifications();
     return res.render("inventory/add-inventory", {
       title: "Add New Inventory",
       classifications: classifications.rows,

@@ -2,6 +2,7 @@ const utilities = require(".")
 const accountModel = require("../models/account-model")
 const { body, validationResult } = require("express-validator")
 const validate = {}
+const jwt = require('jsonwebtoken');
 
 /*  **********************************
   *  Registration Data Validation Rules
@@ -14,7 +15,7 @@ validate.registationRules = () => {
         .escape()
         .notEmpty()
         .isLength({ min: 1 })
-        .withMessage("Please provide a first name."), // on error this message is sent.
+        .withMessage("Please provide a first name."),
   
       // lastname is required and must be string
       body("account_lastname")
@@ -22,14 +23,14 @@ validate.registationRules = () => {
         .escape()
         .notEmpty()
         .isLength({ min: 2 })
-        .withMessage("Please provide a last name."), // on error this message is sent.
+        .withMessage("Please provide a last name."),
   
       // valid email is required and cannot already exist in the database
       body("account_email")
         .trim()
         .isEmail()
         .escape()
-        .normalizeEmail() // refer to validator.js docs
+        .normalizeEmail()
         .withMessage("A valid email is required.")
         .custom(async (account_email) => {
           const emailExists = await accountModel.checkExistingEmail(account_email)
@@ -85,7 +86,7 @@ validate.loginRules = () => {
       .trim()
       .isEmail()
       .escape()
-      .normalizeEmail() // refer to validator.js docs
+      .normalizeEmail()
       .withMessage("A valid email is required.")
       .custom(async (account_email) => {
         const emailExists = await accountModel.checkExistingEmail(account_email)
@@ -129,4 +130,39 @@ validate.loginRules = () => {
     next()
   }
 
-  module.exports = validate
+  const checkLoggedIn = (req, res, next) => {
+    const token = req.cookies.token;
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        res.locals.loggedIn = true;
+        res.locals.firstName = decoded.first_name;
+        res.locals.accountType = decoded.account_type;
+      } catch (err) {
+        console.error("JWT Verification Error:", err);
+        res.locals.loggedIn = false;
+      }
+    } else {
+      res.locals.loggedIn = false;
+    }
+    next();
+  };
+  
+  const restrictToRoles = (roles) => (req, res, next) => {
+    if (res.locals.loggedIn && roles.includes(res.locals.accountData.account_type)) {
+      return next();
+    }
+  
+    req.flash("notice", "You are not authorized to access this page.");
+    console.log("Flash Message Set:", req.flash("notice")); // Debugging
+    res.redirect("/account/login");
+  };
+
+  module.exports = {
+    registationRules: validate.registationRules,
+    checkRegData: validate.checkRegData,
+    loginRules: validate.loginRules,
+    checkLoginData: validate.checkLoginData,
+    checkLoggedIn,
+    restrictToRoles
+  };
