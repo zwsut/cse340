@@ -1,5 +1,6 @@
 const utilities = require("../utilities")
 const invModel = require("../models/inventory-model")
+const { validationResult } = require("express-validator");
 
 /* ****************************************
 *  Deliver inv management view
@@ -80,6 +81,10 @@ async function addClassResult(req, res, next) {
   }
 }
 
+
+/* ****************************************
+*  Build page to add invtentory items
+* *************************************** */
 async function buildAddInventory(req, res, next) {
   try {
     const classifications = await invModel.getClassifications();
@@ -97,8 +102,9 @@ async function buildAddInventory(req, res, next) {
   }
 }
 
-const { validationResult } = require("express-validator");
-
+/* ****************************************
+*  Deliver result of request to add inventory
+* *************************************** */
 async function addInventoryResult(req, res, next) {
   const errors = validationResult(req);
 
@@ -192,7 +198,9 @@ async function editInventoryView (req, res, next) {
   })
 }
 
-// Update Inv edit
+/* ****************************************
+*  Deliver result of updating an inv item
+* *************************************** */
 const updateInventoryResult = async (req, res, next) => {
   const errors = validationResult(req);
 

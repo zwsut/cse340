@@ -25,7 +25,9 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 
-// Update inv
+/* ****************************************
+*  Model to update inventory item info
+* *************************************** */
 const updateInventory = async (data) => {
   const sql = `
     UPDATE public.inventory
@@ -147,7 +149,9 @@ async function addInventory(data) {
   }
 }
 
-// Delete inv
+/* ****************************************
+*  Model to delete an inventory item
+* *************************************** */
 const deleteInventoryById = async (inv_id) => {
   const sql = 'DELETE FROM inventory WHERE inv_id = $1';
 

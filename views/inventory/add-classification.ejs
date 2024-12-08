@@ -6,17 +6,7 @@
     } %>
 
 <!-- Message Block -->
-<% if (messages.error) { %>
-  <div class="flash-error">
-    <%= messages.error %>
-  </div>
-<% } %>
-
-<% if (messages.success) { %>
-  <div class="flash-success">
-    <%= messages.success %>
-  </div>
-<% } %>
+<%- messages() %>
 
   <form id="add-class-form" action="/inv/add-classification" method="post">
     <h2>Add Classification</h2>

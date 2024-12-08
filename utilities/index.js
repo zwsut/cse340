@@ -69,15 +69,12 @@ Util.buildVehiclePage = async function (data) {
   if (data) {
     vehicleTemplate += '<section id="vehicle-details">';
 
-    // Vehicle section container
     vehicleTemplate += '<div class="vehicle-container">';
 
-    // Image - Left on desktop
     vehicleTemplate += '<div class="vehicle-image-container">';
     vehicleTemplate += `<img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">`;
     vehicleTemplate += "</div>";
 
-    // Details - right on desktop
     vehicleTemplate += '<div class="vehicle-details-container">';
     vehicleTemplate += `<h2>${data.inv_make} ${data.inv_model}</h2>`;
     vehicleTemplate += "<p>";

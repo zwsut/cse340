@@ -154,7 +154,7 @@ validate.loginRules = () => {
     }
   
     req.flash("notice", "You are not authorized to access this page.");
-    console.log("Flash Message Set:", req.flash("notice")); // Debugging
+    // console.log("Flash Message Set:", req.flash("notice"));
     res.redirect("/account/login");
   };
 

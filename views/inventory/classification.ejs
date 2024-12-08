@@ -6,17 +6,7 @@
     } %>
 
 <!-- Message Block -->
-<% if (messages.error) { %>
-  <div class="flash-error">
-    <%= messages.error %>
-  </div>
-<% } %>
-
-<% if (messages.success) { %>
-  <div class="flash-success">
-    <%= messages.success %>
-  </div>
-<% } %>
+<%- messages() %>
 
 <!-- Inventory items display -->
  <%- grid %>
