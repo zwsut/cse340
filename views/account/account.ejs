@@ -1,16 +1,16 @@
 <!-- Content Heading -->
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-      res.redirect('/')
-    } %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <h1>Welcome</h1>
+<% } %>
 
 <!-- Message Block -->
-<%- messages() %>
+<%- messages('messages', locals) %>
 
-  <h2>Welcome <%= account_firstname %></h2>
-  <% if (account_type === "Employee" || account_type === "Admin") { %>
-    <h3>Inventory Management</h3>
-    <p><a href="/inv">Go to Inventory Management</a></p>
-  <% } %>
-  <p><a href="/account/update">Update Account Information</a></p>
+<h2>Welcome <%= user.first_name %></h2>
+<% if (user.account_type === "Employee" || user.account_type === "Admin") { %>
+  <p>Inventory Management</p>
+  <a href="/inv">Go to Inventory Management</a>
+<% } %>
+<p><a href="/account/update">Update Account Information</a></p>

@@ -4,7 +4,7 @@
     </span>
     <div id="tools">
       <% if (loggedIn) { %>
-        <a href="/account/update">Welcome <%= firstName %></a>
+        <a href="/account/account">My Account</a>
         <% if (accountType === 'Employee' || accountType === 'Admin') { %>
           <a href="/inv">Inventory Management</a>
         <% } %>

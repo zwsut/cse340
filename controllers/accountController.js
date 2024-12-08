@@ -93,9 +93,10 @@ async function accountLogin(req, res) {
   }
 
   try {
+    // Fetch account data by email
     const accountData = await accountModel.getAccountByEmail(account_email);
     if (!accountData) {
-      req.flash("notice", "Please check your credentials and try again.");
+      req.flash("notice", "Invalid email or password.");
       return res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -104,10 +105,10 @@ async function accountLogin(req, res) {
       });
     }
 
-    // compare passwords
+    // Compare passwords
     const isValidPassword = await bcrypt.compare(account_password, accountData.account_password);
     if (!isValidPassword) {
-      req.flash("notice", "Please check your credentials and try again.");
+      req.flash("notice", "Invalid email or password.");
       return res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -116,28 +117,42 @@ async function accountLogin(req, res) {
       });
     }
 
+    // Create JWT payload
     const payload = {
       account_id: accountData.account_id,
       account_email: accountData.account_email,
       account_type: accountData.account_type,
       first_name: accountData.account_firstname,
     };
-    
-    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
 
+    // Generate JWT token
+    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+
+    // Configure cookie options
     const cookieOptions = {
       httpOnly: true,
-      maxAge: 3600 * 1000,
-      secure: process.env.NODE_ENV !== 'development',
+      maxAge: 3600 * 1000, // 1 hour
+      secure: process.env.NODE_ENV !== "development", // Secure in production
+      sameSite: "strict", // Prevent CSRF
     };
+
+    // Set JWT in a cookie
     res.cookie("jwt", token, cookieOptions);
 
-    req.flash("notice", "Login successful.");
-    return res.redirect("/");
+    // Flash success message and redirect
+    req.flash("notice", "Login successful. Welcome back!");
+    return res.redirect("/account/account");
   } catch (error) {
     console.error("Login Error:", error);
+
+    // Flash error message and redirect back to login page
     req.flash("notice", "An error occurred during login. Please try again.");
-    return res.redirect("/account/login");
+    return res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email,
+    });
   }
 }
 

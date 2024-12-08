@@ -12,7 +12,19 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegistration));
 
 // Route for account after login
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccount));
+router.get("/account", utilities.checkJWTToken, (req, res) => {
+  if (!req.user) {
+    req.flash("notice", "Please log in to access this page.");
+    return res.redirect("/account/login");
+  }
+
+  const title = "My Account";
+  res.render("account/account", {
+    title,
+    nav: res.locals.nav,
+    user: req.user,
+  });
+});
 
 // Route for submitting register form
 router.post(
