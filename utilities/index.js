@@ -131,28 +131,28 @@ Util.handleErrors = (fn) => (req, res, next) =>
  * Middleware to check token validity
  **************************************** */
 Util.checkJWTToken = (req, res, next) => {
-  const token = req.cookies.jwt; // Retrieve token from cookies
-  console.log("JWT Cookie:", token); // Debug log
+  const token = req.cookies.jwt;
+  console.log("JWT Cookie:", token);
 
   if (!token) {
     res.locals.loggedIn = false;
-    console.log("No token found. Redirecting to login."); // Debug log
-    return next(); // Proceed without authentication
+    console.log("No token found. Redirecting to login.");
+    return next();
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); // Verify token
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     res.locals.accountData = decoded;
-    res.locals.loggedIn = true; // Mark as logged in
+    res.locals.loggedIn = true;
     console.log("Logged In Status:", res.locals.loggedIn);
     res.locals.firstName = decoded.first_name;
     res.locals.accountType = decoded.account_type;
-    console.log("Decoded Token Payload:", decoded); // Debug log
-    return next(); // Continue to the next middleware/route
+    console.log("Decoded Token Payload:", decoded);
+    return next();
   } catch (err) {
-    console.error("JWT Verification Error:", err.message); // Debug log
+    console.error("JWT Verification Error:", err.message);
     req.flash("notice", "Session expired or invalid. Please log in again.");
-    res.clearCookie("jwt"); // Clear invalid token
+    res.clearCookie("jwt");
     return res.redirect("/account/login");
   }
 };

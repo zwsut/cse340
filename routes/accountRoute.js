@@ -21,7 +21,7 @@ router.get("/account", utilities.checkJWTToken, (req, res) => {
   res.render("account/account", {
     title,
     nav: res.locals.nav,
-    user: res.locals.accountData, // Use accountData from middleware
+    user: res.locals.accountData,
   });
 });
 
