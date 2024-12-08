@@ -11,9 +11,8 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Route for register button
 router.get("/register", utilities.handleErrors(accountController.buildRegistration));
 
-// Route for account after login
 router.get("/account", utilities.checkJWTToken, (req, res) => {
-  if (!req.user) {
+  if (!res.locals.accountData) {
     req.flash("notice", "Please log in to access this page.");
     return res.redirect("/account/login");
   }
@@ -22,7 +21,7 @@ router.get("/account", utilities.checkJWTToken, (req, res) => {
   res.render("account/account", {
     title,
     nav: res.locals.nav,
-    user: req.user,
+    user: res.locals.accountData, // Use accountData from middleware
   });
 });
 
