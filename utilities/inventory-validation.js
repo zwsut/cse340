@@ -67,7 +67,7 @@ const checkUpdateData = async (req, res, next) => {
           ...req.body,
         });
       } catch (err) {
-        console.error("Error in checkUpdateData:", err);
+        // console.error("Error in checkUpdateData:", err);
         req.flash("notice", "An error occurred while fetching classifications.");
         res.redirect(`/inv/edit/${req.body.inv_id}`);
       }

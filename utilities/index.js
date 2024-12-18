@@ -10,7 +10,7 @@ const Util = {};
 Util.getNav = async function () {
   try {
     let data = await invModel.getClassifications();
-    console.log(data);
+    // console.log(data);
     let list = "<ul>";
     list += '<li><a href="/" title="Home page">Home</a></li>';
     data.rows.forEach((row) => {
@@ -28,7 +28,7 @@ Util.getNav = async function () {
     list += "</ul>";
     return list;
   } catch (error) {
-    console.error("Error building navigation:", error.message);
+    // console.error("Error building navigation:", error.message);
     throw new Error("Could not retrieve classifications.");
   }
 };
@@ -132,11 +132,11 @@ Util.handleErrors = (fn) => (req, res, next) =>
  **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log("JWT Cookie:", token);
+  // console.log("JWT Cookie:", token);
 
   if (!token) {
     res.locals.loggedIn = false;
-    console.log("No token found. Redirecting to login.");
+    // console.log("No token found. Redirecting to login.");
     return next();
   }
 
@@ -144,13 +144,13 @@ Util.checkJWTToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     res.locals.accountData = decoded;
     res.locals.loggedIn = true;
-    console.log("Logged In Status:", res.locals.loggedIn);
+    // console.log("Logged In Status:", res.locals.loggedIn);
     res.locals.firstName = decoded.first_name;
     res.locals.accountType = decoded.account_type;
-    console.log("Decoded Token Payload:", decoded);
+    // console.log("Decoded Token Payload:", decoded);
     return next();
   } catch (err) {
-    console.error("JWT Verification Error:", err.message);
+    // console.error("JWT Verification Error:", err.message);
     req.flash("notice", "Session expired or invalid. Please log in again.");
     res.clearCookie("jwt");
     return res.redirect("/account/login");

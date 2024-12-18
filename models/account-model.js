@@ -55,7 +55,7 @@ async function updateAccountById(account_id, account_firstname, account_lastname
 
     return result.rowCount;
   } catch (error) {
-    console.error("Error in updateAccountById:", error);
+    // console.error("Error in updateAccountById:", error);
     throw error;
   }
 }
@@ -76,7 +76,7 @@ async function updatePassword(account_id, hashedPassword) {
     const result = await pool.query(sql, params);
     return result.rowCount;
   } catch (err) {
-    console.error("Error in updatePassword:", err);
+    // console.error("Error in updatePassword:", err);
     throw err;
   }
 }

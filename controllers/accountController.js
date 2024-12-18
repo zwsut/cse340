@@ -27,7 +27,7 @@ async function buildRegistration(req, res, next) {
     nav,
     errors: null,
   })} catch {
-    console.error("Error in buildRegistration:", err);
+    // console.error("Error in buildRegistration:", err);
     next(err);
   }
 }
@@ -81,7 +81,6 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
 
-  // Validate input
   if (!account_email || !account_password) {
     req.flash("notice", "Email and password are required.");
     return res.status(400).render("account/login", {
@@ -93,7 +92,6 @@ async function accountLogin(req, res) {
   }
 
   try {
-    // Fetch account data by email
     const accountData = await accountModel.getAccountByEmail(account_email);
     if (!accountData) {
       req.flash("notice", "Invalid email or password.");
@@ -105,7 +103,6 @@ async function accountLogin(req, res) {
       });
     }
 
-    // Compare passwords
     const isValidPassword = await bcrypt.compare(account_password, accountData.account_password);
     if (!isValidPassword) {
       req.flash("notice", "Invalid email or password.");
@@ -117,7 +114,13 @@ async function accountLogin(req, res) {
       });
     }
 
-    // Create JWT payload
+    req.session.accountId = accountData.account_id;
+    req.session.accountFirstName = accountData.account_firstname;
+    req.session.accountLastName = accountData.account_lastname;
+    req.session.accountName = `${accountData.account_firstname.charAt(0)}${accountData.account_lastname}`;
+    console.log("Session after login:", req.session);
+    
+
     const payload = {
       account_id: accountData.account_id,
       account_email: accountData.account_email,
@@ -125,27 +128,22 @@ async function accountLogin(req, res) {
       first_name: accountData.account_firstname,
     };
 
-    // Generate JWT token
     const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
 
-    // Configure cookie options
     const cookieOptions = {
       httpOnly: true,
-      maxAge: 3600 * 1000, // 1 hour
-      secure: process.env.NODE_ENV !== "development", // Secure in production
-      sameSite: "strict", // Prevent CSRF
+      maxAge: 3600 * 1000,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
     };
 
-    // Set JWT in a cookie
     res.cookie("jwt", token, cookieOptions);
 
-    // Flash success message and redirect
     req.flash("notice", "Login successful. Welcome back!");
     return res.redirect("/account/account");
   } catch (error) {
     console.error("Login Error:", error);
 
-    // Flash error message and redirect back to login page
     req.flash("notice", "An error occurred during login. Please try again.");
     return res.status(500).render("account/login", {
       title: "Login",
@@ -172,8 +170,8 @@ async function buildAccount(req, res, next) {
 }
 
 async function buildUpdateView(req, res, next) {
-  console.log("res.locals.accountData:", res.locals.accountData);
-  console.log("res.locals.loggedIn:", res.locals.loggedIn);
+  // console.log("res.locals.accountData:", res.locals.accountData);
+  // console.log("res.locals.loggedIn:", res.locals.loggedIn);
 
   try {
     let nav = await utilities.getNav();
@@ -198,7 +196,7 @@ async function buildUpdateView(req, res, next) {
       errors: null,
     });
   } catch (error) {
-    console.error("Error in buildUpdateView:", error);
+    // console.error("Error in buildUpdateView:", error);
     next(error);
   }
 }
@@ -238,7 +236,7 @@ async function updateAccount(req, res, next) {
       res.status(500).redirect("/account/update");
     }
   } catch (error) {
-    console.error("Error updating account:", error);
+    // console.error("Error updating account:", error);
     req.flash("notice", "An error occurred while updating the account. Please try again.");
     res.status(500).redirect("/account/update");
   }

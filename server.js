@@ -27,18 +27,27 @@ const messages = require("express-messages");
 /* ***********************
  * Middleware
  *************************/
+app.use((req, res, next) => {
+  console.log("Session data on every request:", req.session);
+  next();
+});
+
 
 // Session Middleware
 app.use(
   session({
     store: new pgSession({
-      createTableIfMissing: true,
       pool: pool,
+      tableName: "session",
+      createTableIfMissing: true,
     }),
     secret: process.env.SESSION_SECRET || "default_secret",
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 },
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000,
+      secure: process.env.NODE_ENV === "production",
+    },
   })
 );
 

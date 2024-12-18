@@ -617,6 +617,45 @@ h1 {
   display: none;
 }
 
+.reviews {
+  margin: 20px 0;
+}
+
+.reviews h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.review-list {
+  margin-bottom: 20px;
+}
+
+.review {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reviews textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.reviews button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reviews button:hover {
+  background-color: #0056b3;
+}
+
 @media screen and (min-width: 900px) {
   body {
     background-image: url('/images/site/small_check.jpg');

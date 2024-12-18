@@ -25,7 +25,7 @@ async function buildInvManagement(req, res, next) {
 *  Deliver add-classification view
 * *************************************** */
 async function buildAddClassification(req, res, next) {
-  console.log("build add classification working")
+  // console.log("build add classification working")
   try {
     let nav = await utilities.getNav()
     res.render("inventory/add-classification", {
@@ -76,7 +76,7 @@ async function addClassResult(req, res, next) {
       errors: null,
     });
   } catch (err) {
-    console.error("Error in addClassResult:", err);
+    // console.error("Error in addClassResult:", err);
     next(err);
   }
 }
@@ -97,7 +97,7 @@ async function buildAddInventory(req, res, next) {
       errors: null,
     });
   } catch (err) {
-    console.error("Error in buildAddInventory:", err);
+    // console.error("Error in buildAddInventory:", err);
     next(err);
   }
 }
@@ -156,7 +156,7 @@ async function addInventoryResult(req, res, next) {
       return res.redirect("/inv/add-inventory");
     }
   } catch (err) {
-    console.error("Error in addInventoryResult:", err);
+    // console.error("Error in addInventoryResult:", err);
     next(err);
   }
 }
@@ -166,19 +166,19 @@ async function addInventoryResult(req, res, next) {
  *  Build edit inventory view
  * ************************** */
 async function editInventoryView (req, res, next) {
-  console.log("req.params.inv_id:", req.params.inv_id);
+  // console.log("req.params.inv_id:", req.params.inv_id);
   const inv_id = parseInt(req.params.inv_id, 10);
-  console.log("2")
+  // console.log("2")
   let nav = await utilities.getNav()
-  console.log("3")
+  // console.log("3")
   const itemData = await invModel.getDetailByVehicleId(inv_id)
-  console.log(itemData)
+  // console.log(itemData)
   // const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
   const classificationSelect = await invModel.getClassifications();
-  console.log("classificationSelect:", classificationSelect.rows);
-  console.log("5")
+  // console.log("classificationSelect:", classificationSelect.rows);
+  // console.log("5")
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-  console.log("6")
+  // console.log("6")
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
@@ -264,7 +264,7 @@ const updateInventoryResult = async (req, res, next) => {
       return res.redirect(`/inv/edit/${inv_id}`);
     }
   } catch (err) {
-    console.error("Error in updateInventoryResult:", err);
+    // console.error("Error in updateInventoryResult:", err);
     req.flash("notice", "An error occurred during the update process.");
     res.redirect(`/inv/edit/${req.body.inv_id}`);
   }
@@ -291,7 +291,7 @@ async function buildDeleteView(req, res, next) {
       inv_price: itemData.inv_price,
     });
   } catch (err) {
-    console.error("Error building delete confirmation view:", err);
+    // console.error("Error building delete confirmation view:", err);
     next(err);
   }
 }
@@ -313,7 +313,7 @@ const processDelete = async (req, res, next) => {
       return res.redirect("/inv");
     }
   } catch (err) {
-    console.error("Error in processDelete:", err);
+    // console.error("Error in processDelete:", err);
     req.flash("error", "An error occurred during the delete process.");
     res.redirect("/inv");
   }

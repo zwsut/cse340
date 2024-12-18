@@ -139,7 +139,7 @@ validate.loginRules = () => {
         res.locals.firstName = decoded.first_name;
         res.locals.accountType = decoded.account_type;
       } catch (err) {
-        console.error("JWT Verification Error:", err);
+        // console.error("JWT Verification Error:", err);
         res.locals.loggedIn = false;
       }
     } else {

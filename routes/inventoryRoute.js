@@ -7,6 +7,13 @@ const utilities = require("../utilities");
 const { newInventoryRules, checkUpdateData } = require("../utilities/inventory-validation");
 const { restrictToRoles } = require("../utilities/account-validation");
 const { body } = require("express-validator");
+const ReviewController = require('../controllers/reviewController');
+const { ensureLoggedIn } = require('../utilities/auth-middleware');
+
+// console.log('ReviewController:', require('../controllers/reviewController'));
+// console.log('ReviewController.handleAddReview:', require('../controllers/reviewController').handleAddReview);
+// console.log('ensureLoggedIn:', require('../utilities/auth-middleware').ensureLoggedIn);
+// console.log('utilities.handleErrors:', require('../utilities').handleErrors);
 
 // ==========================
 // Public Routes
@@ -20,6 +27,17 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 // Route to build vehicle page by vehicleId
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId));
+
+router.post(
+  '/reviews/add',
+  ensureLoggedIn,
+  [
+    body('review_text').notEmpty().withMessage('Review text is required.'),
+    body('inv_id').isInt().withMessage('Invalid inventory ID.'),
+    body('account_id').isInt().withMessage('Invalid account ID.')
+  ],
+  utilities.handleErrors(ReviewController.handleAddReview)
+);
 
 // ==========================
 // Restricted Routes - employee/admin
